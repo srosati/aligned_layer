@@ -26,3 +26,5 @@ logs.txt
 
 # just for example
 id_rsa
+
+.DS_Store

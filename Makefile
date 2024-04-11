@@ -177,23 +177,13 @@ start-task-generator: ##
 
 __TASK_SENDERS__:
 send-cairo-proof:
-	go run task_sender/cmd/main.go --proof tests/testing_data/fibo_5.proof \
-		--verifier-id cairo \
-		2>&1 | zap-pretty
+	./scripts/send_proof.sh cairo tests/testing_data/fibo_5.proof
 
 send-sp1-proof:
-	go run task_sender/cmd/main.go --proof tests/testing_data/sp1_fibonacci.proof \
-		--verifier-id sp1 \
-		2>&1 | zap-pretty
+	./scripts/send_proof.sh sp1 tests/testing_data/sp1_fibonacci.proof
 
 send-plonk-proof:
-	go run task_sender/cmd/main.go --proof tests/testing_data/plonk_cubic_circuit.proof \
-		--pub-input tests/testing_data/witness.pub \
-		--verifier-id plonk \
-		2>&1 | zap-pretty
+	./scripts/send_proof.sh plonk tests/testing_data/plonk_cubic_circuit.proof tests/testing_data/witness.pub
 
 send-kimchi-proof:
-	go run task_sender/cmd/main.go --proof tests/testing_data/kimchi/kimchi_ec_add.proof \
-		--pub-input tests/testing_data/kimchi/kimchi_verifier_index.bin \
-		--verifier-id kimchi \
-		2>&1 | zap-pretty
+	./scripts/send_proof.sh kimchi tests/testing_data/kimchi/kimchi_ec_add.proof tests/testing_data/kimchi/kimchi_verifier_index.bin

@@ -50,7 +50,6 @@ make cli-setup-operator-linux
 make start-operator
 ```
 
-
 Start the task generator, which will be sending periodic tasks to the Aligned Layer task manager:
 
 ```bash
@@ -59,10 +58,14 @@ make start-task-generator
 
 To send custom tasks with proofs to be verified, in another terminal you can run:
 ```bash
-go run task_sender/cmd/main.go --proof <proof_path> --verifier-id <verifier-string-variant>
+./scripts/send_proof.sh <verifier-string-variant> <proof_path> <pub_input_path?>
 ```
 
-where `proof_path` is the path of the file containing the serialized proof you want to be verified and `verifier-string-variant` is either `cairo` or `plonk`.
+where `proof_path` is the path of the file containing the serialized proof you want to be verified and `verifier-string-variant` is either `cairo`, `plonk`, `sp1` or `kimchi`.
+
+Note that `pub_input_path` is required for `plonk` or `kimchi` but should not be sent otherwise.
+It can read CONFIG_FILE, ALIGNED_LAYER_DEPLOYMENT_FILE, SHARED_AVS_CONTRACTS_DEPLOYMENT_FILE and ECDSA_PRIVATE_KEY from env
+or use default values. By default it will use anvil devnet values.
 
 A shortcut for sending a CAIRO proof of a fibonacci program can be used:
 
@@ -74,6 +77,16 @@ Likewise, for sending a PLONK proof of a cubic circuit:
 
 ```bash
 make send-plonk-proof
+```
+
+To send a SP1 proof of a fibonacci program:
+```bash
+make send-sp1-proof
+```
+
+To send a simple Kimchi proof:
+```bash
+make send-kimchi-proof
 ```
 
 ## Workflow
